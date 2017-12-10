@@ -16,6 +16,25 @@ and open the template in the editor.
             Username <input type="text" name="username"/><br/><br/>
             Password <input type="password" name="password"/><br/><br/>
             <input type="submit"/>
+            <br/>
+            <br/>
+        
+        <?php
+            //If invalid credentials
+            if(isset($_GET['authenticate']))
+            {
+        ?>
+            <font color="red">Invalid username/password !</font>
+        <?php
+                
+            }
+            
+            if(isset($_GET['logged'])){
+        ?>
+            <font color="red">Please login to proceed !</font>
+        <?php
+            }
+        ?>
             
         </form>
     </body>

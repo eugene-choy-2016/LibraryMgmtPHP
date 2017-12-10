@@ -30,7 +30,7 @@ class User {
     }
     
     public function getIsStaff(){
-        return $isStaff;
+        return $this->isStaff;
     }
     
     public function setStaff($checkStaff){

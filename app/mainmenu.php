@@ -5,8 +5,8 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <?php
-    require 'model/User.php';
-    session_start();
+require 'model/User.php';
+session_start();
 ?>
 <html>
     <head>
@@ -14,10 +14,42 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
+        <h1>Main Menu</h1>
         <?php
-            
-            $user = unserialize($_SESSION["session_user"]);
-            echo "Username is ".$user->getUserName();
+        $user = unserialize($_SESSION["session_user"]);
+        $permission = $user->getIsStaff();
+        
+        //Only staff can see these buttons
+        if ($permission == 1) {
+            ?>
+
+            <form>
+                <button formaction="UserManagement/add_user.php">Add User</button>
+            </form><br/>
+
+            <form>
+                <button formaction=add_book.php">Add Book</button>
+            </form><br/>
+
+            <form>
+                <button formaction=remove_book.php"">Remove Book</button>
+            </form><br/>
+
+            <form>
+                <button formaction="update_userdetails.php">Update User Details</button>
+            </form><br/>
+
+            <?php
+        }
         ?>
+
+        <form >
+            <button formaction="view_books.php">View Books</button>
+        </form><br/>
+        
+        <form>
+            <button formaction="logout.php">Log Out</button>
+        </form>
+
     </body>
 </html>
