@@ -5,8 +5,8 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <?php
-require 'model/User.php';
-session_start();
+require '/model/User.php';
+include('/protect/login_protection.php');
 ?>
 <html>
     <head>
@@ -36,7 +36,7 @@ session_start();
             </form><br/>
 
             <form>
-                <button formaction="update_userdetails.php">Update User Details</button>
+                <button formaction="UserManagement/update_user_details.php">Update User Details</button>
             </form><br/>
 
             <?php

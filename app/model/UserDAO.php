@@ -11,16 +11,58 @@ require '../Connection.php';
 class UserDAO {
 
     public static function createUser($userName, $password, $isStaff) {
-        
+
         //statement
         $db = Connection::getConnection();
         $stmt = $db->prepare("INSERT INTO user VALUES (?,?,?)");
-        $stmt->bind_param("ssi", $userName, $password,$isStaff); //prepared statement
+        $stmt->bind_param("ssi", $userName, $password, $isStaff); //prepared statement
         $stmt->execute();
-        
-        if($stmt->affected_rows > 0){
+
+        if ($stmt->affected_rows > 0) {
             return true;
         }
+    }
+
+    public static function retrieveUser($userName, User $sessionUser) {
+        //If staff User, then retrievUser
+        if ($sessionUser->getIsStaff() == 1) {
+            //statement
+            $db = Connection::getConnection();
+            $stmt = $db->prepare("SELECT password,staff FROM user where user_name =?");
+            $stmt->bind_param("s", $userName); //prepared statement
+            $stmt->execute();
+            
+            //if succesful
+            if($result = $stmt->get_result()){
+                $rows = $result->fetch_assoc();
+                $retrievedPassword = $rows["password"];
+                $staffPermission = $rows["staff"];
+                $retrievedUser = new User($userName,$staffPermission);
+                $retrievedUser->setPassword($retrievedPassword, $sessionUser);
+                return $retrievedUser;
+            }
+            return -1;
+            
+        }
+        return -1;
+    }
+    
+    public static function updateUser($userName,$password,$staff){
+        
+    }
+
+    public static function deleteUser($userName) {
+
+        //statement
+        $db = Connection::getConnection();
+        $stmt = $db->prepare("DELETE FROM user where user_name =?");
+        $stmt->bind_param("s", $userName); //prepared statement
+        $stmt->execute();
+
+        if ($stmt->affected_rows > 0) {
+            return true;
+        }
+        return false;
     }
 
 }

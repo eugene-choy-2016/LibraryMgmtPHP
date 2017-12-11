@@ -7,6 +7,15 @@ and open the template in the editor.
 <html>
 
     <head>
+        <?php
+        session_start();
+        if (isset($_SESSION["session_user"])) {
+            header('Location: ../app/mainmenu.php');
+            session_end();
+            exit();
+        }
+        ?>
+
         <meta charset="UTF-8">
         <title>Login Page</title>
     </head>
@@ -18,24 +27,22 @@ and open the template in the editor.
             <input type="submit"/>
             <br/>
             <br/>
-        
-        <?php
+
+            <?php
             //If invalid credentials
-            if(isset($_GET['authenticate']))
-            {
-        ?>
-            <font color="red">Invalid username/password !</font>
-        <?php
-                
+            if (isset($_GET['authenticate'])) {
+                ?>
+                <font color="red">Invalid username/password !</font>
+                <?php
             }
-            
-            if(isset($_GET['logged'])){
-        ?>
-            <font color="red">Please login to proceed !</font>
-        <?php
+
+            if (isset($_GET['logged'])) {
+                ?>
+                <font color="red">Please login to proceed !</font>
+                <?php
             }
-        ?>
-            
+            ?>
+
         </form>
     </body>
 </html>
