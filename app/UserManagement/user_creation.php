@@ -15,8 +15,12 @@ if($isStaff == "yes"){
 $success = UserDAO::createUser($username,$password,$permission);
 
 if($success){
-    echo "User created!";
+    header("Location:add_user.php?success=1");
+}else{
+    header("Location:add_user.php?success=0");
 }
+session_end();
+exit();
 
 ?>
 

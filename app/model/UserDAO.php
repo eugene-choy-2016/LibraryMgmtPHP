@@ -32,9 +32,16 @@ class UserDAO {
             $stmt->bind_param("s", $userName); //prepared statement
             $stmt->execute();
             
+            
+            
             //if succesful
             if($result = $stmt->get_result()){
                 $rows = $result->fetch_assoc();
+                
+                if($result->num_rows <= 0){
+                    return -1;
+                }
+                
                 $retrievedPassword = $rows["password"];
                 $staffPermission = $rows["staff"];
                 $retrievedUser = new User($userName,$staffPermission);
@@ -48,11 +55,19 @@ class UserDAO {
     }
     
     public static function updateUser($userName,$password,$staff){
-        
+        //statement
+        $db = Connection::getConnection();
+        $stmt = $db->prepare("UPDATE `user` SET `password` = ? , `staff` = ? WHERE `user`.`user_name` = ?");
+        $stmt->bind_param("sis",$password,$staff,$userName); //prepared statement
+        $stmt->execute();
+
+        if ($stmt->affected_rows > 0) {
+            return true;
+        }
+        return false;
     }
 
     public static function deleteUser($userName) {
-
         //statement
         $db = Connection::getConnection();
         $stmt = $db->prepare("DELETE FROM user where user_name =?");

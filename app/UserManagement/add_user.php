@@ -30,6 +30,9 @@ and open the template in the editor.
         </script>
     </head>
     <body>
+        <form action="../mainmenu.php">
+            <input type="submit" value="Back to Main Menu">
+        </form>
         <h1>Add New User</h1>
         <form name="userCreation" action="user_creation.php" method="post" onsubmit="return validateForm()">
             Username <input type="text" name="username"/><br/><br/>
@@ -39,6 +42,18 @@ and open the template in the editor.
                 <option value="yes">Yes</option>
             </select><br/><br/>
             <input type="submit"/>
-        </form>
+        </form><br/>
+        
+        <?php
+            if(isset($_GET["success"]) && $_GET["success"] == 1){
+        ?>
+        <font color="green">User successfully created!</font>
+        <?php
+            }else if(isset($_GET["success"]) && $_GET["success"] == 0){
+        ?>
+        <font color="red">User failed to be created!</font>
+        <?php
+            }
+        ?>
     </body>
 </html>
