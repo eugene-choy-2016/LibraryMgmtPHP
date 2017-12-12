@@ -18,7 +18,7 @@ include('/protect/login_protection.php');
         <?php
         $user = unserialize($_SESSION["session_user"]);
         $permission = $user->getIsStaff();
-        
+
         //Only staff can see these buttons
         if ($permission == 1) {
             ?>
@@ -47,6 +47,16 @@ include('/protect/login_protection.php');
             <button formaction="BookManagement/view_books.php">View Books</button>
         </form><br/>
         
+        <form>
+            <button formaction="BookManagement/search_book.php">Search Book</button>
+        </form>
+
+
+        <form>
+            <button formaction="borrow_book.php">Borrow Book</button>
+        </form><br/>
+
+
         <form>
             <button formaction="logout.php">Log Out</button>
         </form>
