@@ -44,7 +44,7 @@ include('/protect/login_protection.php');
         ?>
 
         <form >
-            <button formaction="view_books.php">View Books</button>
+            <button formaction="BookManagement/view_books.php">View Books</button>
         </form><br/>
         
         <form>

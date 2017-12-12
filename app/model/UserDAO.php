@@ -32,8 +32,6 @@ class UserDAO {
             $stmt->bind_param("s", $userName); //prepared statement
             $stmt->execute();
             
-            
-            
             //if succesful
             if($result = $stmt->get_result()){
                 $rows = $result->fetch_assoc();
