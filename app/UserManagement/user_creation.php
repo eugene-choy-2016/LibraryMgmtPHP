@@ -1,6 +1,7 @@
 <?php
-
+require "../model/User.php";
 require '../model/UserDAO.php';
+include('../protect/staff_protection.php');
 session_start(); //Start session
 
 $username = $_POST["username"];

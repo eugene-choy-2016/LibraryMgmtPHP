@@ -1,5 +1,4 @@
 <?php
-
 //Ensure this page is only accessed by staff members
 include('../protect/login_protection.php');
 

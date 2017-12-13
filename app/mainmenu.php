@@ -5,7 +5,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <?php
-require '/model/User.php';
+require "/model/User.php";
 include('/protect/login_protection.php');
 ?>
 <html>
@@ -16,6 +16,7 @@ include('/protect/login_protection.php');
     <body>
         <h1>Main Menu</h1>
         <?php
+        
         $user = unserialize($_SESSION["session_user"]);
         $permission = $user->getIsStaff();
 
@@ -28,7 +29,7 @@ include('/protect/login_protection.php');
             </form><br/>
 
             <form>
-                <button formaction=add_book.php">Add Book</button>
+                <button formaction="BookManagement/add_book.php">Add Book</button>
             </form><br/>
 
             <form>
@@ -46,16 +47,10 @@ include('/protect/login_protection.php');
         <form >
             <button formaction="BookManagement/view_books.php">View Books</button>
         </form><br/>
-        
+
         <form>
             <button formaction="BookManagement/search_book.php">Search Book</button>
-        </form>
-
-
-        <form>
-            <button formaction="borrow_book.php">Borrow Book</button>
         </form><br/>
-
 
         <form>
             <button formaction="logout.php">Log Out</button>

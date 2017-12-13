@@ -9,7 +9,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title>Add New User</title>
         <?php
-        require '../model/User.php';
+        require "../model/User.php";
         include('../protect/staff_protection.php');
         ?>
         <script>

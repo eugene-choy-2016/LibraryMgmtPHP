@@ -9,7 +9,9 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title>View books</title>
         <?php
+        require "../model/User.php";
         require '../model/BookDAO.php';
+        include('../protect/login_protection.php');
         ?>
     </head>
     <body>
@@ -28,6 +30,7 @@ and open the template in the editor.
                 <th>Book Author</th>
                 <th>Location</th>
                 <th>Borrowed</th>
+                <th>Action</th>
             </tr>
 
             <?php
@@ -49,6 +52,19 @@ and open the template in the editor.
                             <font color="green">No</font>
                             <?php
                         }
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                            if(!$book["borrowed"]){
+                        ?>
+                        <form action="borrow_book.php" method="POST">
+                            <input type="hidden" value="view_books.php" name="source">
+                            <input type="hidden" value="<?php echo $book["book_id"];?>" name="bookID">
+                            <input type="submit" value="Borrow">
+                        </form>
+                        <?php
+                            }
                         ?>
                     </td>
                 </tr>
