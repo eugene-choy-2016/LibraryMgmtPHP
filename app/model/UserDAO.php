@@ -42,7 +42,9 @@ class UserDAO {
                 
                 $retrievedPassword = $rows["password"];
                 $staffPermission = $rows["staff"];
-                $retrievedUser = new User($userName,$staffPermission);
+                $retrievedUser = new User();
+                $retrievedUser->setUserName($userName);
+                $retrievedUser->setStaff($staffPermission);
                 $retrievedUser->setPassword($retrievedPassword, $sessionUser);
                 return $retrievedUser;
             }

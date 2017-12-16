@@ -6,7 +6,7 @@ $userName = $_POST["user"];
 $updatedPassword = $_POST["password"];
 $staff = $_POST["staff"];
 
-if($staff == "Y"){
+if($staff == "yes"){
     $staff = 1;
 }else{
     $staff = 0;

@@ -13,18 +13,17 @@
  */
 class User {
 
-    private $username;
-    private $isStaff;
+    private $user_name;
+    private $staff;
     private $password;
 
-    /**
-     * Constructor(Magic method) for User object
-     * @param String $username
-     * @param boolean $isStaff
-     */
-    public function __construct($username, $isStaff) {
-        $this->username = $username;
-        $this->isStaff = $isStaff;
+    
+    public function __set($prop,$val){
+        $this->$prop = $val;
+    }
+    
+    public function __get($prop){
+        return $this->$prop;
     }
 
     /**
@@ -53,15 +52,18 @@ class User {
     }
 
     public function getUserName() {
-        return $this->username;
+        return $this->user_name;
     }
 
     public function getIsStaff() {
-        return $this->isStaff;
+        return $this->staff;
     }
-
+    public function setUserName($user_name){
+       $this->user_name = $user_name;
+    }
+    
     public function setStaff($checkStaff) {
-        $isStaff = $checkStaff;
+        $this->staff = $checkStaff;
     }
 
 }

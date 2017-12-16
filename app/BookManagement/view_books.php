@@ -37,13 +37,13 @@ and open the template in the editor.
             foreach ($books as $book) {
                 ?>
                 <tr>
-                    <td><?php echo $book["book_id"]; ?></td>
-                    <td><?php echo $book["book_name"]; ?></td>
-                    <td><?php echo $book["book_description"]; ?></td>
-                    <td><?php echo $book["book_author"]; ?></td>
-                    <td><?php echo $book["shelf_name"]; ?></td>
+                    <td><?php echo $book->getBookID(); ?></td>
+                    <td><?php echo $book->getBookName(); ?></td>
+                    <td><?php echo $book->getBookDescription(); ?></td>
+                    <td><?php echo $book->getBookAuthor(); ?></td>
+                    <td><?php echo $book->getShelfName(); ?></td>
                     <td><?php
-                        if ($book["borrowed"]) {
+                        if ($book->getBorrowed()) {
                             ?>
                             <font color="red">Yes</font>
                             <?php
@@ -56,11 +56,11 @@ and open the template in the editor.
                     </td>
                     <td>
                         <?php
-                            if(!$book["borrowed"]){
+                            if(!$book->getBorrowed()){
                         ?>
                         <form action="borrow_book.php" method="POST">
                             <input type="hidden" value="view_books.php" name="source">
-                            <input type="hidden" value="<?php echo $book["book_id"];?>" name="bookID">
+                            <input type="hidden" value="<?php echo $book->getBookID();?>" name="bookID">
                             <input type="submit" value="Borrow">
                         </form>
                         <?php
