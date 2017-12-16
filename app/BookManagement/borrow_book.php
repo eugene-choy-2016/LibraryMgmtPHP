@@ -12,6 +12,7 @@ $session_user = unserialize($_SESSION["session_user"]);
 $username = $session_user->getUserName();
 
 $status = BookDAO::borrowBook($username, $book_id);
-echo $status;
 
+header("Location:".$source."?borrowStatus=".$status);
+exit();
 ?>

@@ -41,6 +41,7 @@ and open the template in the editor.
                         <th>Book Author</th>
                         <th>Location</th>
                         <th>Borrowed</th>
+                        <th>Action</th>
                     </tr>
 
                     <?php
@@ -53,8 +54,8 @@ and open the template in the editor.
                             <td><?php echo $book["book_author"]; ?></td>
                             <td><?php echo $book["shelf_name"]; ?></td>
                             <td><?php
-            if ($book["borrowed"]) {
-                            ?>
+                                if ($book["borrowed"]) {
+                                    ?>
                                     <font color="red">Yes</font>
                                     <?php
                                 } else {
@@ -64,14 +65,45 @@ and open the template in the editor.
                                 }
                                 ?>
                             </td>
+
+                            <td>
+                                <?php
+                                if (!$book["borrowed"]) {
+                                    ?>
+                                    <form action="borrow_book.php" method="POST">
+                                        <input type="hidden" value="search_book.php" name="source">
+                                        <input type="hidden" value="<?php echo $book["book_id"]; ?>" name="bookID">
+                                        <input type="submit" value="Borrow">
+                                    </form>
+                                    <?php
+                                }
+                                ?>
+                            </td>
                         </tr>
                         <?php
                     }
                     ?>
-                </table>   
+                </table>
+                <!--Status msg for borrowing of books-->
+
+
                 <?php
             }
         }
         ?>
+        <?php
+        if (isset($_GET["borrowStatus"])) {
+            if ($_GET["borrowStatus"] == 1) {
+                ?>
+                <font color="green">Book successfully borrowed!</font>       
+                <?php
+            } else {
+                ?>
+                <font color="red">Book failed to be borrowed!</font>
+                <?php
+            }
+        }
+        ?>
+
     </body>
 </html>

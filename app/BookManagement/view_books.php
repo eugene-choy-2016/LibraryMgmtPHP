@@ -72,6 +72,19 @@ and open the template in the editor.
             }
             ?>
         </table>
-
+        <!--Status msg for borrowing of books-->
+        <?php
+            if(isset($_GET["borrowStatus"])){
+                if($_GET["borrowStatus"] == 1){
+                ?>
+                    <font color="green">Book successfully borrowed!</font>       
+                <?php
+                }else{
+                ?>
+                    <font color="red">Book failed to be borrowed!</font>
+                <?php
+                }
+            }
+        ?>
     </body>
 </html>

@@ -9,4 +9,5 @@ if (!isset($_SESSION["session_user"]) ) {
     session_end();
     exit();
 }
+
 ?>
