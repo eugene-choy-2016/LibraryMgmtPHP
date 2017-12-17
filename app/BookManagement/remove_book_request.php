@@ -3,7 +3,7 @@ require "../model/User.php";
 require "../model/BookDAO.php";
 include('../protect/staff_protection.php');
 
-$session_user = $_SESSION["session_user"];
+$session_user = unserialize($_SESSION["session_user"]);
 $book_id = $_POST["book_id"];
 
 //Ensure user is staff
