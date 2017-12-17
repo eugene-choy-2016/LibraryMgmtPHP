@@ -9,7 +9,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title>Add New Book</title>
         <?php
-        //Ensure only staff can assist this page
+        //Ensure only staff can access this page
         require "../model/User.php";
         include('../protect/staff_protection.php');
         
@@ -39,7 +39,7 @@ and open the template in the editor.
             <input type="submit" value="Back to Main Menu">
         </form>
         <h1>Add New Book</h1>
-        <form name="bookCreation" action="book_creation.php" method="post" onsubmit="return validateForm()">
+        <form name="bookCreation" action="book_creation_request.php" method="post" onsubmit="return validateForm()">
             Book Name <input type="text" size="50" name="book_name"/><br/><br/>
             Book Description <br/>  <textarea rows="5" cols="50" style="overflow:auto;resize:none" name="book_description" maxlength="100"></textarea><br/><br/>
             Author <input type="text" size=50 name="author"><br/><br/>

@@ -46,6 +46,7 @@ class BookDAO {
             }
 
             $rows = $result->fetch_all(MYSQLI_ASSOC);
+            $db = null;
             return $rows;
         }
     }
@@ -72,6 +73,19 @@ class BookDAO {
             
             return $result;
         }
+    }
+    
+    public static function retrieveBook($book_id){
+        //statement
+        $db = PDOConnection::getConnection();
+        //Get all the books along with the Shelf it is located at
+        $stmt = $db->prepare("SELECT book_id,book_name,book_description,"
+                . "book_author,Shelf.shelf_name, borrowed FROM `book` "
+                . "INNER JOIN shelf ON shelf.shelf_id = book.shelf_id where book_id = ?");
+        $stmt->setFetchMode(PDO::FETCH_CLASS,'Book');
+        $stmt->execute(array($book_id));
+        $result = $stmt->fetch();
+        return $result;
     }
 
     public static function addBook($book_name, $book_description, $book_author, $tags, $shelf_id) {
@@ -165,6 +179,31 @@ class BookDAO {
 
 
         if ($stmt->affected_rows > 0) {
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * Remove book from records, borrowed_book records will be cascaded as well
+     * @param type $book_id
+     * @return boolean false if failed to be deleted, true if deleted successfully
+     */
+    public static function deleteBook($book_id,$session_user){
+        //If book is borrowed, should not be deleted
+        //if book id is blank, return false as well
+        //Ensure user has permission to delete Book
+        if(BookDAO::isBorrowed($book_id)|| $book_id == ""||!$session_user->getIsStaff()){
+            return false;
+        }
+        
+        //If delete book, borrowed_book records will be cascaded as well
+        $db = PDOConnection::getConnection();
+        $stmt = $db->prepare("DELETE FROM book where book_id = ?");
+        $stmt->execute(array($book_id));
+        $count = $stmt->rowCount();
+        
+        if($count == 1){
             return true;
         }
         return false;

@@ -70,7 +70,7 @@ and open the template in the editor.
                                 <?php
                                 if (!$book["borrowed"]) {
                                     ?>
-                                    <form action="borrow_book.php" method="POST">
+                                    <form action="borrow_book_request.php" method="POST">
                                         <input type="hidden" value="search_book.php" name="source">
                                         <input type="hidden" value="<?php echo $book["book_id"]; ?>" name="bookID">
                                         <input type="submit" value="Borrow">

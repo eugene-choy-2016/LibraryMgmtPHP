@@ -33,7 +33,7 @@ include('/protect/login_protection.php');
             </form><br/>
 
             <form>
-                <button formaction=remove_book.php"">Remove Book</button>
+                <button formaction="BookManagement/remove_book.php">Remove Book</button>
             </form><br/>
 
             <form>

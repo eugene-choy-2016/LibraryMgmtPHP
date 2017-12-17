@@ -58,7 +58,7 @@ and open the template in the editor.
                         <?php
                             if(!$book->getBorrowed()){
                         ?>
-                        <form action="borrow_book.php" method="POST">
+                        <form action="borrow_book_request.php" method="POST">
                             <input type="hidden" value="view_books.php" name="source">
                             <input type="hidden" value="<?php echo $book->getBookID();?>" name="bookID">
                             <input type="submit" value="Borrow">
