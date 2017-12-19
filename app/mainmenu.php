@@ -51,6 +51,10 @@ include('/protect/login_protection.php');
         <form>
             <button formaction="BookManagement/search_book.php">Search Book</button>
         </form><br/>
+        
+        <form>
+            <button formaction="BookManagement/return_book.php">Search Book</button>
+        </form><br/>
 
         <form>
             <button formaction="logout.php">Log Out</button>
